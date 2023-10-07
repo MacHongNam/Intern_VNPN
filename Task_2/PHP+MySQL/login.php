@@ -57,8 +57,8 @@
             if ($row == 0) {
                 die("<script type='text/javascript'>alert('Wrong username or password');</script>");
             } else {
-                $_SESSION['id'] = $rows['id'];
-                $_SESSION['username'] = $rows['username'];
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['username'] = $row['username'];
                 header('location: index.php');
             }
         }

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -50,7 +58,6 @@
 
             <tbody>
                 <?php
-                session_start();
                 $conn = mysqli_connect("localhost", "root", "", "task_2");
                 if (!$conn) {
                     echo "<script type='text/javascript'>alert('Connection failed!');</script>";
