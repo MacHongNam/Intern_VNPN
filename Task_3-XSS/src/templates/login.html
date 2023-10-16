@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<section class="vh-100" style="background-color: #e3f2fd">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <h3 class="mb-5">SIGN IN</h3>
+            <form method="post">
+              <div class="form-outline mb-4">
+                <input
+                  type="username"
+                  name="username"
+                  class="form-control form-control-lg"
+                  placeholder="Username"
+                />
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control form-control-lg"
+                  placeholder="Password"
+                />
+              </div>
+
+              <button
+                class="btn btn-primary btn-lg btn-block"
+                type="submit"
+                style="background-color: rgb(88, 114, 171)"
+              >
+                Login
+              </button>
+            </form>
+            {% with messages = get_flashed_messages() %} {% if messages %} {%
+            for m in messages %}
+            <p style="color: #ff4136">{{m}}</p>
+            {% endfor %} {% endif %} {% endwith %}
+            <hr class="my-4" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
