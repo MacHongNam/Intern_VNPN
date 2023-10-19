@@ -67,10 +67,6 @@ def search_url():
                 except:
                     flash('Unable to fetch URL', 'info')
             urlout = render_template_string(url)
-            blacklist = ['<script>', '<svg>', '<input>', '<video>', '<audio>', '<button>']
-            for char in blacklist:
-                if char in urlout:
-                    urlout = urlout.replace(char, '')
             return render_template('search_url.html', url=urlout,search_result=search_result)
         return render_template('search_url.html')
     else: 
