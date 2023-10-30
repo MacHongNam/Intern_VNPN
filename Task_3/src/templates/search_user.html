@@ -39,7 +39,7 @@
   </div>
 </nav>
 <div class="container-fluid mt-4">
-  <form class="d-flex" method="post">
+  <form class="d-flex" method="get">
     <input
       name="name"
       class="form-control me-2"
@@ -58,8 +58,11 @@
   <br />
   <!-- render User  -->
   <script>
-    const name = "{{search_name|safe}}";
-    document.getElementById("name").innerHTML = "The result " + name + " is:";
+    if (location.href.includes("name")) {
+      var pos = location.href.indexOf("name=") + 5;
+      var name = location.href.substring(pos, location.href.length);
+      document.getElementById("name").innerHTML = "The result " + decodeURI(name) + " is:";
+    }
   </script>
   <div id="user">
     {% for user in users %}

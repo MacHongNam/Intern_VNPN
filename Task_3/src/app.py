@@ -1,4 +1,4 @@
-from flask import Flask, render_template_string, request, redirect, url_for, session, flash, render_template, Response, send_file
+from flask import Flask, render_template_string, request, redirect, url_for, session, flash, render_template, Response, send_file, abort
 import pdfkit 
 import db
 import datetime
@@ -77,18 +77,20 @@ def search_url():
     else: 
         return redirect(url_for('login'))
     
-@app.route('/search_user', methods=['GET', 'POST'])
+@app.route('/search_user', methods=['GET'])
 def search_user():
     if 'user' in session:
-        if request.method == 'POST':
-            search_name = request.form['name']
+        if request.method == 'GET' and request.args.get('name'):
+            search_name = request.args.get('name')
             if not search_name:
                 flash('Please provide a username', 'info')
+            elif '<' in search_name or '>' in search_name or '\'' in search_name:
+                abort(403, description="Hackedddddddd!!!!!!!!!!!!!!!!")
             else:
                 results = db.get_users(search_name)
                 if results == []:
                     flash('User not found', 'info')
-                return render_template('search_user.html', search_name=search_name, users=results)
+                return render_template('search_user.html', users=results)
         return render_template('search_user.html')
     else: 
         return redirect(url_for('login'))
